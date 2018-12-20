@@ -1,0 +1,38 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/login-component/login-component.html">
+<link rel="import" href="../../bower_components/contact-component/contact-component.html">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<dom-module id="contact-list-multi-lenguage-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+      }
+    </style>
+    <login-component></login-component>
+    <contact-component></contact-component>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class ContactListMultiLenguageApp extends Polymer.Element {
+      static get is() { return 'contact-list-multi-lenguage-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'contact-list-multi-lenguage-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(ContactListMultiLenguageApp.is, ContactListMultiLenguageApp);
+  </script>
+</dom-module>

@@ -1,0 +1,14 @@
+{
+  "name": "contact-list-multi-lenguage",
+  "description": "An app that creates contacts and show them. Also it toogles lenguages",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "login-component": "jorgeme0996/login-component",
+    "contact-component": "jorgeme0996/contact-component"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  }
+}

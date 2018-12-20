@@ -1,0 +1,7 @@
+{
+  "name": "contact-list-multi-lenguage",
+  "short_name": "contact-list-multi-lenguage",
+  "description": "An app that creates contacts and show them. Also it toogles lenguages",
+  "start_url": "/",
+  "display": "standalone"
+}
