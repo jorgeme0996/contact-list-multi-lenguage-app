@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/contact-component/contact-component.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+
+<dom-module id="user-panel-contacts">
+    <template>
+        <style>
+        </style>
+    
+        <dom-repeat items="[[contacts]]" as="contact">
+            <template>
+                <contact-component contacts=[[contact]]></contact-component>
+            </template>
+        </dom-repeat>
+    </template>
+    <script>
+        class UserPanelContacts extends Polymer.Element {
+            static get is() {return 'user-panel-contacts'}
+            static get properties (){
+                return {
+                    contacts: {
+                        type: Array,
+                        value: []
+                    }
+                }
+            }
+        }
+
+        window.customElements.define(UserPanelContacts.is, UserPanelContacts) 
+    </script>
+</dom-module>

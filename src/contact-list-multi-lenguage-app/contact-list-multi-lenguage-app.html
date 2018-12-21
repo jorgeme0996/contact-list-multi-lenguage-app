@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/login-component/login-component.html">
-<link rel="import" href="../../bower_components/contact-component/contact-component.html">
+<link rel="import" href="../user-panel-contacts/user-panel-contacts.html">
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
@@ -12,8 +12,8 @@
         font-family: 'Roboto', sans-serif;
       }
     </style>
-    <login-component></login-component>
-    <contact-component></contact-component>
+    <login-component on-register-user="registerUser" on-login-user="loginUser"></login-component>
+    <user-panel-contacts></user-panel-contacts>
   </template>
 
   <script>
@@ -25,11 +25,38 @@
       static get is() { return 'contact-list-multi-lenguage-app'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'contact-list-multi-lenguage-app'
+          users: {
+            type: Array,
+            value: []
           }
         };
+      }
+
+      loginUser(event) {
+        const userTryLogin = event.detail
+        const users = this.users;
+        for (let i=0; i<=users.length; i++) {
+          let currentUser = users[i];
+          if(currentUser.username === userTryLogin.username && currentUser.password === userTryLogin.password ){
+            alert('Acceso concedido')
+            event.detail.hiddenLogin = !event.detail.hiddenLogin;
+          } else {
+            alert('Acceso denegado')
+          }
+        }
+      }
+
+      registerUser(event) {
+        const userTryRegister = event.detail
+        console.log(userTryRegister);
+        if (userTryRegister.password === userTryRegister.confirmPassword && userTryRegister.password != ''){
+          this.push('users', userTryRegister);
+          alert('Usuario creado');
+          event.detail.hiddenLogin = !event.detail.hiddenLogin;
+          event.detail.hiddenRegister = !event.detail.hiddenRegister;
+        } else if (userTryRegister.password === '' && userTryRegister.confirmPassword === '') {
+          alert('Las contraseñas no coinciden, ingresalas nuevamente')
+        }
       }
     }
 
