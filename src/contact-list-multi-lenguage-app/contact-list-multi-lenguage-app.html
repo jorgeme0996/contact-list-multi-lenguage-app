@@ -13,7 +13,7 @@
       }
     </style>
     <login-component on-register-user="registerUser" on-login-user="loginUser"></login-component>
-    <user-panel-contacts></user-panel-contacts>
+    <user-panel-contacts user="[[user]]"></user-panel-contacts>
   </template>
 
   <script>
@@ -28,16 +28,21 @@
           users: {
             type: Array,
             value: []
+          },
+          user: {
+            type: Object,
+            value:{}
           }
         };
       }
 
       loginUser(event) {
-        const userTryLogin = event.detail
+        const userTryLogin = event.detail.user
         const users = this.users;
-        for (let i=0; i<=users.length; i++) {
+        for (let i=0; i<users.length; i++) {
           let currentUser = users[i];
           if(currentUser.username === userTryLogin.username && currentUser.password === userTryLogin.password ){
+            this.set('user', currentUser);
             alert('Acceso concedido')
             event.detail.hiddenLogin = !event.detail.hiddenLogin;
           } else {
@@ -47,7 +52,7 @@
       }
 
       registerUser(event) {
-        const userTryRegister = event.detail
+        const userTryRegister = event.detail.user
         console.log(userTryRegister);
         if (userTryRegister.password === userTryRegister.confirmPassword && userTryRegister.password != ''){
           this.push('users', userTryRegister);

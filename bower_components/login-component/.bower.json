@@ -1,0 +1,28 @@
+{
+  "name": "login-component",
+  "description": "a componen tu log in and register",
+  "main": "login-component.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-input": "PolymerElements/paper-input#2.2.3",
+    "paper-button": "PolymerElements/paper-button#2.1.3"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/jorgeme0996/login-component",
+  "_release": "a7456356bd",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "a7456356bd6162278867387675b07a241caf1615"
+  },
+  "_source": "https://github.com/jorgeme0996/login-component.git",
+  "_target": "*",
+  "_originalSource": "jorgeme0996/login-component"
+}

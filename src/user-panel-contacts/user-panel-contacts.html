@@ -6,7 +6,8 @@
     <template>
         <style>
         </style>
-    
+        <h1>Hola [[user.fistName]] [[user.lastName]] [[user.contacts]]</h1>
+        
         <dom-repeat items="[[contacts]]" as="contact">
             <template>
                 <contact-component contacts=[[contact]]></contact-component>
@@ -18,12 +19,26 @@
             static get is() {return 'user-panel-contacts'}
             static get properties (){
                 return {
+                    user: {
+                        type: Object,
+                        value: {}
+                    },
                     contacts: {
                         type: Array,
                         value: []
-                    }
+                    },
+                    setContacts: {
+                        type: Array,
+                        computed: "_setUserContacts(user)"
+                    },
                 }
             }
+
+            _setUserContacts(user){
+                console.log(user.contacts)
+                this.set('contacts', user.contacts)
+            }
+
         }
 
         window.customElements.define(UserPanelContacts.is, UserPanelContacts) 

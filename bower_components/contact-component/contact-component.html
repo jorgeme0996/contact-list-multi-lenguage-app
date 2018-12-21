@@ -1,0 +1,115 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<dom-module id="contact-component">
+  <template>
+    <style>
+      paper-card {
+        --paper-card-header-image: {
+          width: 250px;
+          height: 100px;
+        }
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+
+      paper-card {
+        width: 250px;
+        height: auto;
+        margin: 2%;
+        border-radius: 10%;
+        text-align: center;
+      }
+
+      paper-card:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+
+      paper-button.call {
+        color: #388E3C;
+      }
+
+      paper-button.message {
+        color: #FBC02D;
+      }
+      
+      div.card-content:hover {
+        transform: scale(1.1, 1.2) 
+      }
+
+    </style>
+    
+    <div class="container">
+      <dom-repeat items="[[contacts]]" as="contact">
+        <template>
+          <paper-card image='[[contact.image]]'>
+              <div class="card-content" on-tap="show"><h3>[[contact.fistName]] [[contact.lastName]]</h3></div>
+              <div class="card-actions">
+                <paper-button class="call" on-tap="call">Call</paper-button>
+                <paper-button class="message" on-tap="message">Message</paper-button>
+              </div>
+            </paper-card>
+        </template>
+      </dom-repeat>
+    </div>
+  </template>
+  <script>
+    /**
+     * `contact-component`
+     * A simple material desing contacts component
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ContactComponent extends Polymer.Element {
+      static get is() { return 'contact-component'; }
+      static get properties() {
+        return {
+          contacts: {
+            type: Array,
+            value: []
+          },
+          conectedContacts: {
+            type: String,
+            computed: '_getConectedContactsSize(contacts)'
+          }
+        };
+      }
+      _getConectedContactsSize(contacts){
+        let text = ''
+        if (contacts.filter(contact => contact.status === 'Online').length === 1) {
+          text = contacts.filter(contact => contact.status === 'Online').length + ' contacto conectado.'
+        } else {
+          text = contacts.filter(contact => contact.status === 'Online').length + ' contactos conectados.'
+        }
+        return text;
+      }
+
+      call(event) {
+        this.dispatchEvent(new CustomEvent('make-call', {
+          bubbles: false,
+          composed:false,
+          detail: event.model.contact
+        }));
+      }
+
+      show(event){
+        this.dispatchEvent(new CustomEvent('show', {
+          bubbles: false,
+          composed:false,
+          detail: event.model.contact
+        }));
+      }
+    }
+
+    window.customElements.define(ContactComponent.is, ContactComponent);
+  </script>
+</dom-module>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>contact-component demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../contact-component.html">
+
+    <link rel="import" href="../../paper-toast/paper-toast.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        #toast{
+          height: 400px;
+        }
+        paper-button{
+          color: red;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic contact-component demo</h3>
+      <demo-snippet>
+        <template>   
+          <div id="container">
+            <paper-toast raised duration="0" class="fit-bottom" id="toast">
+              <paper-button raised onclick="toast.toggle()" class="yellow-button"><h2 id="hangUp">Hang Up</h2></paper-button>
+            </paper-toast>
+            <paper-toast raised duration="0" class="fit-bottom" id="toast2">
+              <paper-button raised onclick="toast2.toggle()" class="yellow-button"><h2 id="hangUp">Close</h2></paper-button>
+            </paper-toast>
+            <contact-component></contact-component>
+          </div>
+        </template>
+        <script>
+          const element = document.querySelector('contact-component');
+          element.contacts = [
+            {
+              fistName: 'Jorge',
+              lastName: 'Martínez',
+              phone: '5556234895',
+              image: 'http://www.gaby-moreno.com/administrator/public_html/css/ionicons/src/android-contact.svg',
+              status: 'Online',
+            },
+            {
+              fistName: 'Jair',
+              lastName: 'Espino',
+              phone: '5536589452',
+              image: 'http://www.gaby-moreno.com/administrator/public_html/css/ionicons/src/android-contact.svg',
+              status: 'Offline',
+            },
+          ];
+
+          element.addEventListener('make-call', event =>{
+            const contact = event.detail;
+            const text = 'Calling: ' + contact.fistName + ' ' +  contact.lastName + ' Phone: ' + contact.phone;
+            const toast = document.querySelector('#toast');
+            toast.text = text; 
+
+            toast.fitInto = container;
+            toast.open();
+          });
+
+          element.addEventListener('show', event =>{
+            const contact = event.detail;
+            const text = 'Contact Info: ' + contact.fistName + ' ' +  contact.lastName + ' Phone: ' + contact.phone + ' Status: ' + contact.status;
+            const toast2 = document.querySelector('#toast2');
+            toast2.text = text; 
+
+            toast2.fitInto = container;
+            toast2.open();
+          });
+
+        </script>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
